@@ -9,8 +9,8 @@ interface FilterContextType {
     setMinPrice: (price: number | undefined) => void
     maxPrice: number | undefined,
     setMaxPrice: (price: number | undefined) => void
-    keyword: string
-    setKeyword: (keyword: string) => void
+    keywords: string
+    setKeywords: (keywords: string) => void
 }
 
 
@@ -23,14 +23,14 @@ export const FilterProvider : React.FC<{ children: ReactNode }> = ({
     const [minPrice, setMinPrice] = useState<number | undefined>(undefined)
     const [maxPrice, setMaxPrice] = useState<number | undefined>(undefined)
     const [selectedCategory, setSelectedCategory] = useState<string>('')
-    const [keyword, setKeyword] = useState<string>('')
+    const [keywords, setKeywords] = useState<string>('')
 
 
     return <FilterContext.Provider value={{
         searchQuery,
         setSearchQuery,
-        keyword,
-        setKeyword,
+        keywords,
+        setKeywords,
         selectedCategory,
         setSelectedCategory,
         minPrice,

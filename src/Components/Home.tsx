@@ -6,7 +6,7 @@ import axios from "axios";
 import BookCart from "./BookCart";
 
 function Home() {
-    const { searchQuery, selectedCategory, keyword, minPrice, maxPrice, setSearchQuery } =
+    const { searchQuery, selectedCategory, keywords, minPrice, maxPrice, setSearchQuery } =
         useFilter();
     const [product, setProduct] = useState<any[]>([]);
     const [filter, setFilter] = useState("all");
@@ -15,20 +15,23 @@ function Home() {
     const itemsPerPage = 12;
 
     useEffect(() => {
-        let url = `https://dummyjson.com/products?limit=${itemsPerPage}&skip=${(currentPage - 1) * itemsPerPage}`
+        setCurrentPage(1); // Reset to first page on keyword change
+    }, [keywords]);
 
-        if (keyword) {
-            url = `https://dummyjson.com/products?q=${keyword}`
+    useEffect(() => {
+        let url = `https://dummyjson.com/products?limit=${itemsPerPage}&skip=${(currentPage - 1) * itemsPerPage}`;
+        if (keywords) {
+            url = `https://dummyjson.com/products/search?q=${keywords}`;
         }
 
-        axios.get(url).then(response => {
-            setProduct(response.data.products)
-
-        }).catch(error => {
-            console.log(`error ${error}`);
-
-        })
-    }, [currentPage, keyword])
+        axios.get(url)
+            .then((response) => {
+                setProduct(response.data.products);
+            })
+            .catch((error) => {
+                console.log(`error ${error}`);
+            });
+    }, [currentPage, keywords]);
 
     const getFilteredProducts = () => {
         let filteredProducts = product
@@ -68,9 +71,27 @@ function Home() {
     }
 
     const filteredProducts = getFilteredProducts()
+    const totalProducts = 100
+    const totalPages = Math.ceil(totalProducts / itemsPerPage)
+
+    const handlePageChange = (page: number) => {
+        if (page > 0 && page <= totalPages) {
+            setCurrentPage(page)
+        }
+    }
+
+    const getPaginationButton = () => {
+        const buttons: number[] = []
+        let startPage = Math.max(1, currentPage - 2)
+        let endPage = Math.max(totalPages, currentPage + 2)
+
+        if (currentPage - 2 - 1) {
+            endPage = Math.min(totalPages, endPage + (2 - currentPage - 1))
+        }
+    }
 
     return (
-        <div className=" w-screen">
+        <div className="">
             <div className="p-2 bg-amber-50 text-amber-950 font-medium">
                 <div className="flex justify-between items-center mx-4 ">
                     {/* Search */}
@@ -98,15 +119,15 @@ function Home() {
                 </div>
             </div>
 
-            {/* <div className="w-full">
+            <div className="w-full">
                 <img
                     src="https://res.cloudinary.com/tushartharwani/image/upload/v1743946275/SAVE_50_1_rfg8mr.png"
                     alt="banner"
                 />
-            </div> */}
+            </div>
 
             <section className=" relative">
-                <button className="border flex items-center">
+                <button className="flex items-center">
                     <Tally3 />
                     {filter === "all"
                         ? "Filter"
@@ -133,18 +154,37 @@ function Home() {
                     </button>
                 </div>
             )}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                {filteredProducts.map((product) => (
-                    <BookCart
-                        key={product.id}
-                        id={product.id}
-                        title={product.title}
-                        image={product.thumbnail}
-                        price={product.price}
-                    />
-                ))}
-            </div>
 
+            {filteredProducts.length === 0 ? (
+                <div className="text-center col-span-full text-gray-500">No products found</div>
+            ) : (
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    {filteredProducts.map((product) => (
+                        <BookCart
+                            key={product.id}
+                            id={product.id}
+                            title={product.title}
+                            image={product.thumbnail}
+                            price={product.price}
+                        />
+                    ))}
+                </div>
+            )}
+
+            <div className="flex flex-col sm:flex-row gap-4 items-center justify-evenly p-4">
+                <button
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className="bg-amber-950 text-amber-50 w-25 p-2 font-bold">
+                    Previous
+                </button>
+                <button
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className="bg-amber-950 text-amber-50 w-25 p-2 font-bold">
+                    Next
+                </button>
+            </div>
 
             {/* <div>
                 <TopMerchants />

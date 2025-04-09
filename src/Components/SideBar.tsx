@@ -12,8 +12,8 @@ export default function SideBar() {
     }
 
     const {
-        keyword,
-        setKeyword,
+        keywords,
+        setKeywords,
         selectedCategory,
         setSelectedCategory,
         minPrice,
@@ -24,12 +24,13 @@ export default function SideBar() {
 
 
     const [category, setCategory] = useState<string[]>([])
-    const [keywords] = useState<string[]>([
-        "Phone",
+    const [keyword] = useState<string[]>([
+        "Apple",
+        "Watch",
         "Fashion",
-        "Watches",
+        "Trend",
         "Shoes",
-        "Sports"
+        "Shirt"
     ]);
 
 
@@ -62,20 +63,20 @@ export default function SideBar() {
         setSelectedCategory(category)
     }
 
-    const handleKeywordChage = (keyword: string) => {
-        setKeyword(keyword)
+    const handleKeywordChage = (keywords: string) => {
+        setKeywords(keywords)
     }
 
     const handleResetFilter = () => {
         setMaxPrice(undefined)
         setMinPrice(undefined)
         setSelectedCategory("")
-        setKeyword("")
+        setKeywords("")
 
     }
 
     return (
-        <div className="w-56 max-h-screen bg-amber-50">
+        <div className="w-56 h-screen bg-amber-50 overflow-y-auto">
             <div className='w-[75px] block '>
                 <img
                     className='mx-4'
@@ -90,23 +91,6 @@ export default function SideBar() {
                             Categories
                         </h2>
                     </div>
-
-                    {/* {category.map((category, index) => {
-                        return (
-                            <div className="flex items-center p-1 gap-2">
-                                <label key={index} >
-                                    <input type="radio"
-                                        value={category}
-                                        name='category'
-                                        className=""
-                                        onChange={() => handleCategoryChange(category)}
-                                        checked={selectedCategory === category}
-                                    />
-                                    {category.toUpperCase()}
-                                </label>
-                            </div>
-                        )
-                    })} */}
 
                     {category.map((category, index) => (
                         <div key={index} className="flex items-center p-1 gap-2">
@@ -133,14 +117,16 @@ export default function SideBar() {
                         </h2>
                     </div>
 
-                    {keywords.map((keywords, index) => (
-                        <button key={index}
-                            className=' rounded mb-1 shadow-2xl block w-full text-left p-1 hover:bg-amber-950 hover:text-white cursor-pointer'
-                            onClick={() => handleKeywordChage(keyword)}
+                    {keyword.map((kw, index) => (
+                        <button
+                            key={index}
+                            className='rounded mb-1 shadow-2xl block w-full text-left p-1 hover:bg-amber-950 hover:text-white cursor-pointer'
+                            onClick={() => handleKeywordChage(kw)} 
                         >
-                            {keywords.toUpperCase()}
+                            {kw.toUpperCase()}
                         </button>
                     ))}
+
 
                 </section>
 
