@@ -24,24 +24,20 @@ export default function SideBar() {
 
 
     const [category, setCategory] = useState<string[]>([])
-    const [keywords] = useState<String[]>([
+    const [keywords] = useState<string[]>([
         "Phone",
         "Fashion",
         "Watches",
         "Shoes",
         "Sports"
-    ])
+    ]);
+
 
     useEffect(() => {
         const fetchCategories = async () => {
             try {
                 const response = await axios.get("https://dummyjson.com/products")
-                // const data:FetchResponse = await response.json()
-                console.log(response);
-
                 const uniqueCategory = Array.from(new Set(response.data.products.map((product => product.category))))
-                console.log(uniqueCategory);
-
                 setCategory(uniqueCategory)
 
             } catch (error) {
@@ -66,25 +62,28 @@ export default function SideBar() {
         setSelectedCategory(category)
     }
 
-    const handleKeywordChage = (keyword:string) =>{
+    const handleKeywordChage = (keyword: string) => {
         setKeyword(keyword)
     }
 
-    const handleResetFilter = () =>{
+    const handleResetFilter = () => {
         setMaxPrice(undefined)
         setMinPrice(undefined)
         setSelectedCategory("")
         setKeyword("")
-        
+
     }
 
     return (
-        <div className="w-56 h-screen bg-amber-50">
-            <h2 className="font-bold text-2xl">ShopIt</h2>
+        <div className="w-56 max-h-screen bg-amber-50">
+            <div className='w-[75px] block '>
+                <img
+                    className='mx-4'
+                    src="https://res.cloudinary.com/tushartharwani/image/upload/v1743948277/nsmxozcbpx5bwfoiwnlg.png" alt="" />
+            </div>
+
 
             <section>
-                {/* Next will be for range */}
-
                 <section className='m-2'>
                     <div className='mb-2'>
                         <h2 className="font-bold text-xl  text-amber-950">
@@ -92,7 +91,7 @@ export default function SideBar() {
                         </h2>
                     </div>
 
-                    {category.map((category, index) => {
+                    {/* {category.map((category, index) => {
                         return (
                             <div className="flex items-center p-1 gap-2">
                                 <label key={index} >
@@ -100,13 +99,30 @@ export default function SideBar() {
                                         value={category}
                                         name='category'
                                         className=""
-                                        onChange={() => handleCategoryChange(category)} />
-                                    checked = {selectedCategory === category}
+                                        onChange={() => handleCategoryChange(category)}
+                                        checked={selectedCategory === category}
+                                    />
                                     {category.toUpperCase()}
                                 </label>
                             </div>
                         )
-                    })}
+                    })} */}
+
+                    {category.map((category, index) => (
+                        <div key={index} className="flex items-center p-1 gap-2">
+                            <label>
+                                <input
+                                    type="radio"
+                                    value={category}
+                                    name="category"
+                                    onChange={() => handleCategoryChange(category)}
+                                    checked={selectedCategory === category}
+                                />
+                                {category.toUpperCase()}
+                            </label>
+                        </div>
+                    ))}
+
 
                 </section>
 
@@ -119,9 +135,9 @@ export default function SideBar() {
 
                     {keywords.map((keywords, index) => (
                         <button key={index}
-                         className=' rounded mb-1 shadow-2xl block w-full text-left p-1 hover:bg-amber-950 hover:text-white cursor-pointer'
-                         onClick={()=> handleKeywordChage(keyword)}
-                         >
+                            className=' rounded mb-1 shadow-2xl block w-full text-left p-1 hover:bg-amber-950 hover:text-white cursor-pointer'
+                            onClick={() => handleKeywordChage(keyword)}
+                        >
                             {keywords.toUpperCase()}
                         </button>
                     ))}
@@ -147,9 +163,9 @@ export default function SideBar() {
                 </section>
 
                 <div className='m-2'>
-                    <button 
-                    className='bg-amber-950 text-white block w-full p-2 text-center cursor-pointer'
-                    onClick={handleResetFilter}>
+                    <button
+                        className='bg-amber-950 text-white block w-full p-2 text-center cursor-pointer'
+                        onClick={handleResetFilter}>
                         Reset Filter
                     </button>
                 </div>
