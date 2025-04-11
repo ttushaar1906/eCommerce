@@ -1,9 +1,10 @@
 import { Settings, User, ShoppingCart, Tally3 } from "lucide-react";
-// import TopMerchants from "./TopMerchants";
 import { useFilter } from "./FilterContext";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import BookCart from "./BookCart";
+import TopSellers from "./TopSellers";
+import PopularBlog from "./PopularBlog";
 
 function Home() {
     const { searchQuery, selectedCategory, keywords, minPrice, maxPrice, setSearchQuery } =
@@ -81,17 +82,31 @@ function Home() {
     }
 
     const getPaginationButton = () => {
-        const buttons: number[] = []
-        let startPage = Math.max(1, currentPage - 2)
-        let endPage = Math.max(totalPages, currentPage + 2)
+        const buttons: number[] = [];
+        const visiblePages = 5; // total number of pagination buttons to show
+        let startPage = Math.max(1, currentPage - 2);
+        let endPage = Math.min(totalPages, currentPage + 2);
 
-        if (currentPage - 2 - 1) {
-            endPage = Math.min(totalPages, endPage + (2 - currentPage - 1))
+        const pagesShown = endPage - startPage + 1;
+
+        if (pagesShown < visiblePages) {
+            if (startPage > 1) {
+                startPage = Math.max(1, startPage - (visiblePages - pagesShown));
+            } else if (endPage < totalPages) {
+                endPage = Math.min(totalPages, endPage + (visiblePages - pagesShown));
+            }
         }
-    }
+
+        for (let page = startPage; page <= endPage; page++) {
+            buttons.push(page);
+        }
+
+        return buttons;
+    };
+
 
     return (
-        <div className="">
+        <div>
             <div className="p-2 bg-amber-50 text-amber-950 font-medium">
                 <div className="flex justify-between items-center mx-4 ">
                     {/* Search */}
@@ -121,13 +136,13 @@ function Home() {
 
             <div className="w-full">
                 <img
-                    src="https://res.cloudinary.com/tushartharwani/image/upload/v1743946275/SAVE_50_1_rfg8mr.png"
+                    src="https://res.cloudinary.com/tushartharwani/image/upload/v1744310216/xj5dct0pozenfjyf7nxm.png"
                     alt="banner"
                 />
             </div>
 
-            <section className=" relative">
-                <button className="flex items-center">
+            <section className="m-2">
+                <button className="flex items-center" onClick={()=> setDropDown(!dropDown)}>
                     <Tally3 />
                     {filter === "all"
                         ? "Filter"
@@ -136,20 +151,20 @@ function Home() {
             </section>
 
             {dropDown && (
-                <div className="absolute bg-red-300 border-gray-300 border">
+                <div className=" bg-amber-50 border-gray-300 border m-2">
                     <button
                         onClick={() => setFilter("cheap")}
-                        className="block text-left hover:bg-red-200">
+                        className="block text-left hover:bg-amber-950 w-full hover:text-amber-50 m-1 cursor-pointer">
                         Cheaper
                     </button>
                     <button
                         onClick={() => setFilter("expensive")}
-                        className="block text-left hover:bg-red-200">
+                        className="block text-left hover:bg-amber-950 w-full hover:text-amber-50 m-1 cursor-pointer">
                         Expensive
                     </button>
                     <button
                         onClick={() => setFilter("popular")}
-                        className="block text-left hover:bg-red-200">
+                        className="block text-left hover:bg-amber-950 w-full hover:text-amber-50 m-1 cursor-pointer">
                         Popular
                     </button>
                 </div>
@@ -171,13 +186,24 @@ function Home() {
                 </div>
             )}
 
-            <div className="flex flex-col sm:flex-row gap-4 items-center justify-evenly p-4">
+            <div className="flex flex-col sm:flex-row gap-4 items-center justify-center p-4">
                 <button
                     onClick={() => handlePageChange(currentPage - 1)}
                     disabled={currentPage === 1}
                     className="bg-amber-950 text-amber-50 w-25 p-2 font-bold">
                     Previous
                 </button>
+
+
+                {getPaginationButton().map(page => (
+                    <button key={page}
+                        onClick={() => handlePageChange(page)}
+                        className={`${page === currentPage ? `bg-amber-950 text-amber-50` : `bg-amber-50 text-amber-950`} px-2 rounded-full m-1`}>
+                        {page}
+                    </button>
+                ))}
+
+
                 <button
                     onClick={() => handlePageChange(currentPage + 1)}
                     disabled={currentPage === totalPages}
@@ -186,9 +212,10 @@ function Home() {
                 </button>
             </div>
 
-            {/* <div>
-                <TopMerchants />
-            </div> */}
+           {/* <div> */}
+            <TopSellers />
+            <PopularBlog />
+           {/* </div> */}
         </div>
     );
 }

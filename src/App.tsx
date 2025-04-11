@@ -1,6 +1,8 @@
-import { BrowserRouter as Router } from "react-router-dom"
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom"
 import SideBar from "./Components/SideBar"
 import Home from "./Components/Home"
+import ProductPage from "./Components/ProductPage"
+import TopSellers from "./Components/TopSellers"
 
 function App() {
   return (
@@ -12,9 +14,12 @@ function App() {
 
         {/* Main Content (scrollable) */}
         <div className="ml-56 flex-1 h-screen overflow-y-auto">
-          <Home />
+          <Routes>
+          <Route path="/" element = {<Home />} />
+          <Route path="/product/:id" element={<ProductPage />} />            
+          </Routes>
         </div>
-      </div>
+ </div>
     </Router>
   )
 }
