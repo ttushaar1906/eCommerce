@@ -31,7 +31,7 @@ export default function SideBar() {
                 const response = await axios.get("https://dummyjson.com/products")
                 const uniqueCategory = Array.from(
                     new Set(response.data.products.map((product: { category: string }) => product.category))
-                )
+                ) as string[]
                 setCategories(uniqueCategory)
             } catch (error) {
                 console.error(`Error fetching categories: ${error}`)
