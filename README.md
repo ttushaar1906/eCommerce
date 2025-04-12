@@ -20,6 +20,9 @@ A modern, responsive eCommerce web application that allows users to browse and s
 ### 🏠 Home Page with Filters & Banner
 
 ![Home Page](./src/assests/image.png)
+![Mobile Home](./src//assests/mobileSS1.png)
+![Mobile Home](./src//assests/mobileSS2.png)
+
 
 > 💡 This screenshot shows the sidebar filters (Categories, Keywords, Price Range), search input, and a promotional banner.
 
