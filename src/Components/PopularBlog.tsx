@@ -50,7 +50,7 @@ export default function PopularBlog() {
       
   
     return (
-      <div className="bg-white py-6 px-4 rounded-lg shadow-md max-w-5xl mx-auto">
+      <div className="bg-white py-6 px-4 rounded-lg shadow-md max-w-5xl mx-auto mb-8">
         <h2 className="text-3xl text-center mb-6 font-bold text-amber-950">Popular Blogs</h2>
   
         <div className="grid gap-6 md:grid-cols-2">

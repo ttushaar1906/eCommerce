@@ -1,4 +1,4 @@
-import { Settings, User, ShoppingCart, Tally3 } from "lucide-react";
+import { Tally3 } from "lucide-react";
 import { useFilter } from "./FilterContext";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -7,7 +7,7 @@ import TopSellers from "./TopSellers";
 import PopularBlog from "./PopularBlog";
 
 function Home() {
-    const { searchQuery, selectedCategory, keywords, minPrice, maxPrice, setSearchQuery } =
+    const { searchQuery, selectedCategory, keywords, minPrice, maxPrice } =
         useFilter();
     const [product, setProduct] = useState<any[]>([]);
     const [filter, setFilter] = useState("all");
@@ -70,7 +70,6 @@ function Home() {
         }
 
     }
-
     const filteredProducts = getFilteredProducts()
     const totalProducts = 100
     const totalPages = Math.ceil(totalProducts / itemsPerPage)
@@ -104,36 +103,8 @@ function Home() {
         return buttons;
     };
 
-
     return (
-        <div>
-            <div className="p-2 bg-amber-50 text-amber-950 font-medium">
-                <div className="flex justify-between items-center mx-4 ">
-                    {/* Search */}
-                    <div className="bg-white border rounded-md sm:p-2 w-32 p-1 sm:w-72 ">
-                        <input
-                            type="text"
-                            placeholder="Search Products"
-                            className="w-full m-0 outline-none focus:border-none focus:ring-0"
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                        />
-                    </div>
-                    {/* Settings, logo */}
-                    <div className="flex justify-center items-center gap-1 sm:gap-4">
-                        <div className="rounded-2xl border cursor-pointer p-1 sm:p-2 ">
-                            <ShoppingCart className="w-4 sm:w-6" />
-                        </div>
-                        <div className="rounded-2xl border cursor-pointer p-1 sm:p-2">
-                            <Settings className="w-4 sm:w-6" />
-                        </div>
-                        <div className="rounded-2xl border cursor-pointer p-1 sm:p-2">
-                            <User className="w-4 sm:w-6" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+        <div className="overflow-y-auto hide-scrollbar h-screen">
             <div className="w-full">
                 <img
                     src="https://res.cloudinary.com/tushartharwani/image/upload/v1744310216/xj5dct0pozenfjyf7nxm.png"
