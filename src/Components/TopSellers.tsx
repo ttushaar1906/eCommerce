@@ -32,14 +32,14 @@ function TopSellers() {
     setAuthors(prevAuthor => prevAuthor.map((author, i) => i === index ? { ...author, isFollowing: !author.isFollowing } : author))
   }
   return (
-    <div className="bg-white py-6 px-4 rounded-lg shadow-md max-w-5xl mx-auto">
+    <div className="bg-white py-3 px-2 sm:py-6 sm:px-4 rounded-lg shadow-md max-w-5xl mx-auto">
       <h2 className="text-3xl text-center mb-6 font-bold text-amber-950">Top Sellers</h2>
 
-      <ul className="flex flex-wrap justify-center gap-6">
+      <ul className="flex flex-wrap justify-center gap-3 sm:gap-6">
         {authors.map((author, index) => (
           <li
             key={index}
-            className="flex flex-col items-center bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition duration-300 w-[160px] min-h-[240px] justify-between"
+            className="flex flex-col items-center bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition duration-300 sm:w-[160px] sm:min-h-[240px] justify-between"
           >
             <div className="flex flex-col items-center">
               <img

@@ -83,7 +83,7 @@ function Home() {
 
     const getPaginationButton = () => {
         const buttons: number[] = [];
-        const visiblePages = 5; // total number of pagination buttons to show
+        const visiblePages = 3; // total number of pagination buttons to show
         let startPage = Math.max(1, currentPage - 2);
         let endPage = Math.min(totalPages, currentPage + 2);
 
@@ -110,7 +110,7 @@ function Home() {
             <div className="p-2 bg-amber-50 text-amber-950 font-medium">
                 <div className="flex justify-between items-center mx-4 ">
                     {/* Search */}
-                    <div className="bg-white border rounded-md p-2 w-72">
+                    <div className="bg-white border rounded-md sm:p-2 w-32 p-1 sm:w-72 ">
                         <input
                             type="text"
                             placeholder="Search Products"
@@ -120,15 +120,15 @@ function Home() {
                         />
                     </div>
                     {/* Settings, logo */}
-                    <div className="flex justify-center items-center gap-4">
-                        <div className="rounded-2xl border cursor-pointer p-2">
-                            <ShoppingCart />
+                    <div className="flex justify-center items-center gap-1 sm:gap-4">
+                        <div className="rounded-2xl border cursor-pointer p-1 sm:p-2 ">
+                            <ShoppingCart className="w-4 sm:w-6" />
                         </div>
-                        <div className="rounded-2xl border cursor-pointer p-2">
-                            <Settings />
+                        <div className="rounded-2xl border cursor-pointer p-1 sm:p-2">
+                            <Settings className="w-4 sm:w-6" />
                         </div>
-                        <div className="rounded-2xl border cursor-pointer p-2">
-                            <User />
+                        <div className="rounded-2xl border cursor-pointer p-1 sm:p-2">
+                            <User className="w-4 sm:w-6" />
                         </div>
                     </div>
                 </div>
@@ -142,7 +142,7 @@ function Home() {
             </div>
 
             <section className="m-2">
-                <button className="flex items-center" onClick={()=> setDropDown(!dropDown)}>
+                <button className="flex items-center" onClick={() => setDropDown(!dropDown)}>
                     <Tally3 />
                     {filter === "all"
                         ? "Filter"
@@ -186,36 +186,41 @@ function Home() {
                 </div>
             )}
 
-            <div className="flex flex-col sm:flex-row gap-4 items-center justify-center p-4">
+            <div className="flex sm:flex-row gap-4 items-center justify-center p-4">
                 <button
                     onClick={() => handlePageChange(currentPage - 1)}
                     disabled={currentPage === 1}
-                    className="bg-amber-950 text-amber-50 w-25 p-2 font-bold">
-                    Previous
+                    className="bg-amber-950 text-amber-50 w-24 p-2 font-bold flex items-center justify-center"
+                >
+                    <span className="block sm:hidden">&lt;</span>
+                    <span className="hidden sm:block">Previous</span>
                 </button>
 
-
                 {getPaginationButton().map(page => (
-                    <button key={page}
+                    <button
+                        key={page}
                         onClick={() => handlePageChange(page)}
-                        className={`${page === currentPage ? `bg-amber-950 text-amber-50` : `bg-amber-50 text-amber-950`} px-2 rounded-full m-1`}>
+                        className={`${page === currentPage
+                            ? `bg-amber-950 text-amber-50`
+                            : `bg-amber-50 text-amber-950`} px-3 py-1 rounded-full m-1 font-semibold`}
+                    >
                         {page}
                     </button>
                 ))}
 
-
                 <button
                     onClick={() => handlePageChange(currentPage + 1)}
                     disabled={currentPage === totalPages}
-                    className="bg-amber-950 text-amber-50 w-25 p-2 font-bold">
-                    Next
+                    className="bg-amber-950 text-amber-50 w-24 p-2 font-bold flex items-center justify-center"
+                >
+                    <span className="block sm:hidden">&gt;</span>
+                    <span className="hidden sm:block">Next</span>
                 </button>
             </div>
 
-           {/* <div> */}
             <TopSellers />
             <PopularBlog />
-           {/* </div> */}
+
         </div>
     );
 }

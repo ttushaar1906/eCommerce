@@ -9,7 +9,6 @@ export default function NavBar() {
                     <img src="" alt="logo" className="w-full object-contain" />
                 </div>
                 {/* Search */}
-                {/* Remove highlight after click*/}
                 <div className="bg-white border rounded-md p-2 w-72">
                     <input
                         type="text"

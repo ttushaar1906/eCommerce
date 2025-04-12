@@ -34,11 +34,11 @@ export default function ProductPage() {
         <div>
             <button onClick={() => navigate(-1)} className="bg-amber-950 text-amber-50 p-4 rounded m-4 cursor-pointer">Back</button>
 
-            <div className="border w-1/2 block mx-auto p-4">
+            <div className="sm:w-1/2 block mx-4 sm:mx-auto p-4 shadow-lg">
                 <img src={product.images[0]} alt="productImage" className="w-[50%] block mx-auto object-cover
 " />
-                <h2 className="font-bold text-2xl text-amber-950 ">{product.title}</h2>
-                <p className="text-xl my-2">{product.description}</p>
+                <h2 className="font-bold text-lg sm:text-xl text-amber-950 mb-2">{product.title}</h2>
+                <p className=" sm:text-xl my-2">{product.description}</p>
 
                 <div className="flex justify-between">
                     <p className="my-4 font-semibold text-lg">₹ {product.price} /-</p>
