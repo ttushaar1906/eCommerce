@@ -15,10 +15,20 @@ A modern, responsive eCommerce web application that allows users to browse and s
 
 ---
 
+## 📸 Screenshots
+
+### 🏠 Home Page with Filters & Banner
+
+![Home Page](./src/assests/image.png)
+
+> 💡 This screenshot shows the sidebar filters (Categories, Keywords, Price Range), search input, and a promotional banner.
+
+---
+
 ## 🧑‍💻 Tech Stack
 
-- **Frontend**: *React, Typescript, Tailwind*
-- **Other Tools**: Axios  etc.
+- **Frontend**: *React, TypeScript, Tailwind*
+- **Other Tools**: Axios, etc.
 
 ---
 
