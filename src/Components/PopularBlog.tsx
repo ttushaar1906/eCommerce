@@ -51,11 +51,11 @@ export default function PopularBlog() {
   
     return (
       <div className="bg-white py-6 px-4 rounded-lg shadow-md max-w-5xl mx-auto mb-8">
-        <h2 className="text-3xl text-center mb-6 font-bold text-amber-950">Popular Blogs</h2>
+        <h2 className="text-3xl text-center mb-6 font-bold text-indigo-950">Popular Blogs</h2>
   
         <div className="grid gap-6 md:grid-cols-2">
           {blogs.map((blog, index) => (
-            <div key={index} className="flex gap-4 bg-amber-50 rounded-lg shadow p-4 hover:shadow-md transition">
+            <div key={index} className="flex gap-4 bgColor rounded-lg shadow p-4 hover:shadow-md transition">
               <img
                 src={blog.image}
                 alt={blog.title}
@@ -63,14 +63,14 @@ export default function PopularBlog() {
               />
               <div className="flex flex-col justify-between w-full">
                 <div>
-                  <h3 className="font-semibold text-lg text-amber-950">{blog.title}</h3>
-                  <p className="text-sm text-gray-700 mt-1 line-clamp-2">{blog.summary}</p>
+                  <h3 className="font-semibold text-lg text-indigo-950">{blog.title}</h3>
+                  <p className="text-sm text-slate-950 mt-1 line-clamp-2">{blog.summary}</p>
                 </div>
-                <div className="text-xs text-gray-500 mt-3 flex justify-between items-center">
+                <div className="text-xs text-slate-950 mt-3 flex justify-between items-center">
                   <span>By: {blog.author}</span>
                   <span>{new Date(blog.date).toLocaleDateString()}</span>
                 </div>
-                <div className="text-xs mt-2 text-gray-600 flex gap-4">
+                <div className="text-xs mt-2 text-slate-950 flex gap-4">
                   <span>💬 {blog.comments} comments</span>
                   <span>❤️ {blog.likes} likes</span>
                 </div>

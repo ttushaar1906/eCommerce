@@ -26,3 +26,12 @@ input[type=number] {
     transition: transform 0.3s ease-in-out;
   }
 }
+
+
+.bgColor{
+  background-color: #D8DDE3;
+}
+
+.filterStyle{
+  @apply block text-left hover:bg-indigo-950 w-full hover:text-white m-1 cursor-pointer
+}

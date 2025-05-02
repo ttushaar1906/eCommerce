@@ -33,7 +33,7 @@ function TopSellers() {
   }
   return (
     <div className="bg-white py-3 px-2 sm:py-6 sm:px-4 rounded-lg shadow-md max-w-5xl mx-auto">
-      <h2 className="text-3xl text-center mb-6 font-bold text-amber-950">Top Sellers</h2>
+      <h2 className="text-3xl text-center mb-6 font-bold text-indigo-950">Top Sellers</h2>
 
       <ul className="flex flex-wrap justify-center gap-3 sm:gap-6">
         {authors.map((author, index) => (
@@ -47,14 +47,14 @@ function TopSellers() {
                 alt={author.name}
                 className="w-20 h-20 rounded-full object-cover mb-3 border-2 border-amber-100"
               />
-              <p className="text-amber-950 font-medium text-sm text-center">{author.name}</p>
+              <p className="text-slate-950 font-medium text-sm text-center">{author.name}</p>
             </div>
             <button
               onClick={() => handleFollowClick(index)}
               className={`mt-4 px-4 py-1 rounded-full text-sm font-semibold transition
                 ${author.isFollowing
-                  ? 'bg-red-50 text-amber--950 hover:bg-amber-800 hover:text-white'
-                  : 'bg-amber-950 text-white hover:bg-amber-800'
+                  ? 'bg-slate-950 text-white hover:bg-indigo-950 hover:text-white'
+                  : 'bg-indigo-950 text-white hover:bg-slate-950'
                 }`}
             >
               {author.isFollowing ? 'Unfollow' : 'Follow'}

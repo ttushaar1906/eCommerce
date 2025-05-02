@@ -1,11 +1,12 @@
 
 import { Settings, User, ShoppingCart } from 'lucide-react';
 import { useFilter } from './FilterContext';
+import Logo from "../assests/logo.png"
 
 export default function NavBar({ toggleSidebar }: { toggleSidebar: () => void }) {
     const { searchQuery, setSearchQuery } = useFilter();
     return (
-        <div className="p-2 bg-amber-50 text-amber-950 font-medium">
+        <div className="p-2 bg-white text-indigo-950 font-medium">
             <div className="flex justify-between items-center mx-4">
                 {/* Logo (clickable on mobile) */}
                 <div
@@ -14,7 +15,8 @@ export default function NavBar({ toggleSidebar }: { toggleSidebar: () => void })
                 >
                     <img
                         className="object-cover"
-                        src="https://res.cloudinary.com/tushartharwani/image/upload/v1743948277/nsmxozcbpx5bwfoiwnlg.png"
+                        src={Logo}
+                        // src="https://res.cloudinary.com/tushartharwani/image/upload/v1743948277/nsmxozcbpx5bwfoiwnlg.png"
                         alt="logo"
                     />
                 </div>
@@ -24,7 +26,7 @@ export default function NavBar({ toggleSidebar }: { toggleSidebar: () => void })
                     <input
                         type="text"
                         placeholder="Search Products"
-                        className="w-full m-0 outline-none focus:border-none focus:ring-0"
+                        className="w-full m-0 outline-none focus:border-none focus:ring-0 text-indigo-950"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                     />

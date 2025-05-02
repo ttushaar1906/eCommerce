@@ -61,12 +61,12 @@ export default function SideBar() {
     }
 
     return (
-        <div className="h-screen mt-15 sm:mt-20 bg-amber-50 overflow-y-auto hide-scrollbar">
+        <div className="h-screen mt-15 sm:mt-20 bg-white overflow-y-auto hide-scrollbar">
 
             <section>
                 {/* Categories */}
                 <div className="m-2">
-                    <h2 className="font-bold sm:text-xl text-amber-950 mb-2">Categories</h2>
+                    <h2 className="font-bold sm:text-xl text-indigo-950 mb-2">Categories</h2>
                     {categories.map((cat, index) => (
                         <div key={index} className="flex items-center p-1 text-sm sm:text-lg gap-2">
                             <label>
@@ -85,11 +85,11 @@ export default function SideBar() {
 
                 {/* Keywords */}
                 <div className="m-2">
-                    <h2 className="font-bold sm:text-xl text-amber-950 mb-2">Keywords</h2>
+                    <h2 className="font-bold sm:text-xl text-indigo-950 mb-2">Keywords</h2>
                     {keywordList.map((keywords, index) => (
                         <button
                             key={index}
-                            className="rounded mb-1 block w-full text-left p-1 hover:bg-amber-950 hover:text-white cursor-pointer"
+                            className="rounded mb-1 block w-full text-left p-1 hover:bg-indigo-950 hover:text-white cursor-pointer"
                             onClick={() => setKeywords(keywords)}
                         >
                             {keywords.toUpperCase()}
@@ -99,7 +99,7 @@ export default function SideBar() {
 
                 {/* Price Range */}
                 <div className="m-2">
-                    <h2 className="font-bold sm:text-xl text-amber-950 mb-2">Set Price</h2>
+                    <h2 className="font-bold sm:text-xl text-indigo-950 mb-2">Set Price</h2>
                     <div className="flex justify-between gap-2 flex-wrap items-center">
                         <input
                             type="number"
@@ -121,7 +121,7 @@ export default function SideBar() {
                 {/* Reset Filter Button */}
                 <div className="m-2">
                     <button
-                        className="bg-amber-950 text-white block w-full p-2 text-center cursor-pointer"
+                        className="text-white bg-indigo-950 block w-full p-2 text-center cursor-pointer"
                         onClick={handleResetFilter}
                     >
                         Reset Filter

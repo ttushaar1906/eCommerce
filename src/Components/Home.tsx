@@ -5,6 +5,8 @@ import axios from "axios";
 import BookCart from "./BookCart";
 import TopSellers from "./TopSellers";
 import PopularBlog from "./PopularBlog";
+import Model from "../assests/model.jpg"
+import Man from "../assests/man.png"
 
 function Home() {
     const { searchQuery, selectedCategory, keywords, minPrice, maxPrice } =
@@ -53,7 +55,6 @@ function Home() {
         if (searchQuery) {
             filteredProducts = filteredProducts.filter((product => product.title.toLowerCase().includes(searchQuery.toLowerCase())))
         }
-        console.log(filteredProducts);
 
         switch (filter) {
             case "expensive":
@@ -105,11 +106,31 @@ function Home() {
 
     return (
         <div className="overflow-y-auto hide-scrollbar h-screen">
-            <div className="w-full">
-                <img
-                    src="https://res.cloudinary.com/tushartharwani/image/upload/v1744310216/xj5dct0pozenfjyf7nxm.png"
-                    alt="banner"
-                />
+            <div className="w-full flex">
+                <div className="w-1/2 sm:w-1/3 bgColor flex flex-col items-center justify-center md:gap-2 lg:gap-4 ">
+                    <h1 className="font-bold text-[10px] md:text-lg lg:text-xl">SPECIAL OFFER</h1>
+                    <h1 className="font-bold text-xs md:text-xl lg:text-4xl pt-1">BLACK FRIDAY</h1>
+
+                    <div className="flex items-center gap-1 sm:gap-4">
+                        <img src={Man} alt="" className="w-[25px] sm:w-[50px]" />
+                        <h2 className="font-bold text-[10px] sm:text-xs text-slate-950">FREE DELIVERY ON FIRST ORDER</h2>
+                    </div>
+
+                    <button
+                        className="rounded sm:my-1 block bg-indigo-950 text-white  text-center p-1 sm:p-3 hover:bg-slate-950 hover:text-white cursor-pointer"
+                    >
+                        Order Now
+                    </button>
+
+                </div>
+                <div className="w-1/2 sm:w-2/3 ">
+                    <img
+                        src={Model}
+                        alt="banner"
+                        className="w-full object-cover mix-blend-multiply"
+                    />
+                </div>
+
             </div>
 
             <section className="m-2">
@@ -122,29 +143,29 @@ function Home() {
             </section>
 
             {dropDown && (
-                <div className=" bg-amber-50 border-gray-300 border m-2">
+                <div className=" bgColor border-gray-300 border m-2">
                     <button
                         onClick={() => setFilter("cheap")}
-                        className="block text-left hover:bg-amber-950 w-full hover:text-amber-50 m-1 cursor-pointer">
+                        className="filterStyle">
                         Cheaper
                     </button>
                     <button
                         onClick={() => setFilter("expensive")}
-                        className="block text-left hover:bg-amber-950 w-full hover:text-amber-50 m-1 cursor-pointer">
+                        className="filterStyle">
                         Expensive
                     </button>
                     <button
                         onClick={() => setFilter("popular")}
-                        className="block text-left hover:bg-amber-950 w-full hover:text-amber-50 m-1 cursor-pointer">
+                        className="filterStyle">
                         Popular
                     </button>
                 </div>
             )}
 
             {filteredProducts.length === 0 ? (
-                <div className="text-center col-span-full text-gray-500">No products found</div>
+                <div className="text-center col-span-full text-slate-950">No products found</div>
             ) : (
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                     {filteredProducts.map((product) => (
                         <BookCart
                             key={product.id}
@@ -161,7 +182,7 @@ function Home() {
                 <button
                     onClick={() => handlePageChange(currentPage - 1)}
                     disabled={currentPage === 1}
-                    className="bg-amber-950 text-amber-50 w-24 p-2 font-bold flex items-center justify-center"
+                    className="bg-indigo-950 text-white w-24 p-2 font-bold flex items-center justify-center"
                 >
                     <span className="block sm:hidden">&lt;</span>
                     <span className="hidden sm:block">Previous</span>
@@ -172,8 +193,8 @@ function Home() {
                         key={page}
                         onClick={() => handlePageChange(page)}
                         className={`${page === currentPage
-                            ? `bg-amber-950 text-amber-50`
-                            : `bg-amber-50 text-amber-950`} px-3 py-1 rounded-full m-1 font-semibold`}
+                            ? `bg-slate-950 text-white`
+                            : `bg-white text-indigo-950 border`} px-3 py-1 rounded-full m-1 font-semibold`}
                     >
                         {page}
                     </button>
@@ -182,7 +203,7 @@ function Home() {
                 <button
                     onClick={() => handlePageChange(currentPage + 1)}
                     disabled={currentPage === totalPages}
-                    className="bg-amber-950 text-amber-50 w-24 p-2 font-bold flex items-center justify-center"
+                    className="bg-indigo-950 text-white w-24 p-2 font-bold flex items-center justify-center"
                 >
                     <span className="block sm:hidden">&gt;</span>
                     <span className="hidden sm:block">Next</span>
